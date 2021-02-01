@@ -2,8 +2,8 @@
 
 // ブラウザバックの抑制
 history.pushState(null, null, null);
-$(window).on("popstate", function (event) {
-    if (!event.originalEvent.state) {
+$(window).on('popstate', function (e) {
+    if (!e.originalEvent.state) {
         history.pushState(null, null, null);
         return;
     }
@@ -11,7 +11,7 @@ $(window).on("popstate", function (event) {
 
 // リロードの抑制
 // 右クリックからの読み込みは抑制不可
-$(document).on('keydown', function(e){
+$(document).on('keydown', function(e) {
     switch (e.which || e.keyCode) {
         case 82:
             // Ctrl+Rキーの無効化
