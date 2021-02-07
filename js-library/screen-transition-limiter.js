@@ -1,37 +1,41 @@
 // ToDo: jQueryを読み込む
 
-// DOMの準備が出来てから実行される
+// ブラウザバックの抑制
 $(function() {
-    
-    // ブラウザバックの抑制
     history.pushState(null, null, null);
     $(window).on('popstate', function (e) {
-        if (!e.originalEvent.state) {
-            history.pushState(null, null, null);
+        
+        // 初回アクセス時対策
+        if (e.originalEvent.state) {
             return;
         }
+
+        history.pushState(null, null, null);
     });
-    
-    // リロードの抑制
-    // 右クリックからの読み込みは抑制不可
+});
+
+// リロードの抑制
+// 右クリックからの読み込みは抑制不可
+$(function() {
     $(document).on('keydown', function(e) {
         switch (e.which || e.keyCode) {
             case 82:
-                // Ctrl+Rキーの無効化
+                // Ctrl+Rキー、Ctrl+Shift+Rキーの無効化
                 // Ctrlが押されていない場合はOK
                 if (!e.ctrlKey) {
                     break;
                 }
-            case 116:
-                // F5キーの無効化
                 return false;
-                break;
+            case 116:
+                // F5キー、Shift+F5キーの無効化
+                return false;
         }
     });
-    
-    // 右クリック禁止
+});
+
+// 右クリック禁止
+$(function() {
     $(document).on('contextmenu', function(e) {
         return false;
     });
-    
 });
