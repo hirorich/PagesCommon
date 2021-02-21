@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../PagesCommon/framework/bootstrap/css/bootstrap.min.css">
     <script src="../PagesCommon/framework/jquery/jquery.min.js"></script>
-    <script src="../PagesCommon/framework/vue/dist/vue.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../PagesCommon/vue-component/v-cloak.css">
     <title>PagesCommon</title>
 </head>
 <body>
-    <div id="main-component"></div>
-
-    <!-- Vue定義 -->
-    <script src="index.js"></script>
+    <div id="main"></div>
 
     <script src="../PagesCommon/framework/popper/dist/umd/popper.min.js"></script>
     <script src="../PagesCommon/framework/bootstrap/js/bootstrap.min.js"></script>
-</body>
+    <script src="../PagesCommon/framework/marked/marked.min.js"></script>
+    <script>
+        fetch('./README.md')
+            .then(response => response.text())
+            .then(result => document.getElementById('main').innerHTML = marked(result));
+    </script>
+    </body>
 </html>
